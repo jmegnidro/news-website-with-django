@@ -1,0 +1,391 @@
+{%  extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+            <div class="row">
+                <!--colleft-->
+                <div class="col-md-8 col-sm-12">
+                    <!--sportlight-->
+                    <section>
+                        <div>
+                            {% for article in published_articles_vogues %}
+                            <article class="spotlight-item">
+                                <div class="spotlight-img">
+                                    <img alt="" src="{{ article.thumbail.url }}" class="img-responsive" />
+                                    <a href="#" class="cate-tag">{{ article.category }}</a>
+                                </div>
+                                <div class="spotlight-item-caption">
+                                    <h2 class="font-heading">
+                                        <a href="article.html">
+                                            {{ article.title|safe}}
+                                        </a>
+                                    </h2>
+                                    <div class="meta-post">
+                                        <a href="#">
+                                            {{ article.author }}
+                                        </a>
+                                        <em></em>
+                                        <span>
+                                           {{ article.date_published }}
+                                        </span>
+                                    </div>
+                                    <p>{{ article.content|safe|truncatewords:50 }} </p>
+                                </div>
+                            </article>
+                        </div>
+                                {% endfor %}
+                    </section>
+
+                    <!--spotlight-thumbs-->
+                    <section class="spotlight-thumbs">
+                        <div class="row">
+                            {% for art in published_articles %}
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="spotlight-item-thumb">
+                                    <div class="spotlight-item-thumb-img">
+                                        <a href="#">
+                                            <img alt="" src="{{ art.thumbail.url}}" />
+                                        </a>
+                                        <a href="#" class="cate-tag">{{ art.category }}</a>
+                                    </div>
+                                    <h3><a href="#">{{ art.title|safe }}</a></h3>
+                                    <div class="meta-post">
+                                        <a href="#">
+                                        </a>
+                                        <em></em>
+                                        <span>
+                                            {{ art.date_published}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+
+                    <!--box-news-->
+
+                    <!--box-news-->
+
+                    <!--box-news-->
+                </div>
+
+                <!--colright-->
+                <div class="col-md-4 col-sm-12">
+                    <!--tab popular-->
+                    <ul role="tablist" class="tab-popular">
+                        <li class="active">
+                            <a href="#tab1" role="tab" data-toggle="tab">
+                                ALERTE
+                            </a>
+                        </li>
+
+
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="tab1">
+                            <ul class="list-news-popular">
+                                {% for un in unes %}
+                                <li>
+                                    <a href="#">
+                                        <img alt="" src="{{ un.thumbail.url }}">
+                                    </a>
+                                    <h3><a href="#">{{ un.title }}</a></h3>
+                                    <div class="meta-post">
+                                        <a href="#">
+                                            {{ un.author }}
+
+                                        </a>
+                                        <em></em>
+                                        <span>
+                                           {{ un.date_published }}
+                                        </span>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+
+                        </div>
+                    </div>
+
+
+                    <!-- special post-->
+                    <div class="connect-us">
+                        <div class="widget-title">
+                            <span>
+                                Mention Spéciale
+                            </span>
+                        </div>
+                        <div class="list-special">
+                            {% for special in is_special%}
+                            <article class="news-two-large">
+                                <a href="#">
+                                    <img alt="" src="{{ special.thumbail.url }}">
+                                </a>
+                                <h3><a href="#">{{ special.title }}</a></h3>
+                                <div class="meta-post">
+                                    <a href="#">
+                                        {{ special.author}}
+                                    </a>
+                                    <em></em>
+                                    <span>
+                                      {{ special.date_published }}
+                                    </span>
+                                </div>
+
+                            </article>
+                            {% endfor %}
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<hr>
+
+<br>
+                <div class="row">
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="box-caption">
+                        <span>POLITIQUE</span>
+                    </div>
+
+                    <div class="reviews">
+                        <div class="row">
+                            {% for politique in politiques %}
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="reviews-item">
+                                    <a href="#">
+                                        <img alt="" src="{{ politique.thumbail.url }}" />
+                                    </a>
+                                    <div class="reviews-des">
+                                        <h3>
+                                            <a href="#">{{ politique.title }}</a>
+                                        </h3>
+
+                                        <div class="meta-post">
+                                            <a href="#">
+                                                {{ politique.author }}
+                                            </a>
+                                            <em></em>
+                                            <span>
+                                               {{ politique.date_published }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+<hr>
+                <div class="row">
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="box-caption">
+                            <span>ÉCONOMIE</span>
+                    </div>
+
+                    <div class="reviews">
+                        <div class="row">
+                            {% for economie in economies %}
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="reviews-item">
+                                    <a href="#">
+                                        <img alt="" src="{{ economie.thumbail.url }}" />
+                                    </a>
+                                    <div class="reviews-des">
+                                        <h3>
+                                            <a href="#">{{ economie.title }}</a>
+                                        </h3>
+
+                                        <div class="meta-post">
+                                            <a href="#">
+                                                {{ economie.author }}
+                                            </a>
+                                            <em></em>
+                                            <span>
+                                               {{ economie.date_published }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+<hr>
+
+
+                <div class="row">
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="box-caption">
+                            <span>FINANCE</span>
+                    </div>
+
+                    <div class="reviews">
+                        <div class="row">
+                            {% for finance in finances %}
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="reviews-item">
+                                    <a href="#">
+                                        <img alt="" src="{{ finance.thumbail.url }}" />
+                                    </a>
+                                    <div class="reviews-des">
+                                        <h3>
+                                            <a href="#">{{ finance.title }}</a>
+                                        </h3>
+
+                                        <div class="meta-post">
+                                            <a href="#">
+                                                {{ finance.author }}
+                                            </a>
+                                            <em></em>
+                                            <span>
+                                               {{ finance.date_published }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+<hr>
+
+
+                <div class="row">
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="box-caption">
+                            <span>SOCIÉTÉ</span>
+                    </div>
+
+                    <div class="reviews">
+                        <div class="row">
+                            {% for societe in societes %}
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="reviews-item">
+                                    <a href="#">
+                                        <img alt="" src="{{ societe.thumbail.url }}" />
+                                    </a>
+                                    <div class="reviews-des">
+                                        <h3>
+                                            <a href="#">{{ societe.title }}</a>
+                                        </h3>
+
+                                        <div class="meta-post">
+                                            <a href="#">
+                                                {{ societe.author }}
+                                            </a>
+                                            <em></em>
+                                            <span>
+                                               {{ societe.date_published }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+<hr>
+
+             <div class="row">
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="box-caption">
+                            <span>INNOVATION</span>
+                    </div>
+
+                    <div class="reviews">
+                        <div class="row">
+                            {% for entreprise in entreprises %}
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="reviews-item">
+                                    <a href="#">
+                                        <img alt="" src="{{ entreprise.thumbail.url }}" />
+                                    </a>
+                                    <div class="reviews-des">
+                                        <h3>
+                                            <a href="#">{{ entreprise.title }}</a>
+                                        </h3>
+
+                                        <div class="meta-post">
+                                            <a href="#">
+                                                {{ entreprise.author }}
+                                            </a>
+                                            <em></em>
+                                            <span>
+                                               {{ entreprise.date_published }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+<hr>
+
+             <div class="row">
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="box-caption">
+                            <span>INTERNATIONAL</span>
+                    </div>
+
+                    <div class="reviews">
+                        <div class="row">
+                            {% for internation in internationales %}
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="reviews-item">
+                                    <a href="#">
+                                        <img alt="" src="{{ internation.thumbail.url }}" />
+                                    </a>
+                                    <div class="reviews-des">
+                                        <h3>
+                                            <a href="#">{{ internation.title }}</a>
+                                        </h3>
+
+                                        <div class="meta-post">
+                                            <a href="#">
+                                                {{ internation.author }}
+                                            </a>
+                                            <em></em>
+                                            <span>
+                                               {{ internation.date_published }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+<hr>
+
+
+{% endblock %}

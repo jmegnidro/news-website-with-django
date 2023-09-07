@@ -1,0 +1,184 @@
+{%  extends 'base.html' %}
+
+
+{% block content %}
+
+
+            <div class="row">
+                <!--colleft-->
+                <div class="col-md-8 col-sm-12">
+                    <!--post-detail-->
+                    <article class="post-detail">
+                        <h1>{{ get_detai_article.title }}</h1>
+                        <div class="meta-post">
+                            <a href="#">
+                                {{ get_detai_article.author }}
+                            </a>
+                            <em></em>
+                            <span>
+                                {{ get_detai_article.date_published }}                            </span>
+                        </div>
+                              <div class="post-detail-img">
+                            <img alt="" src="{{ get_detai_article.thumbail.url  }}" />
+                        </div>
+
+                        <p> <span class="dropcap "></span> {{ get_detai_article.content|safe }} </p>
+
+
+
+
+
+
+
+
+
+
+                        <h5 class="text-right font-heading"><strong>{{ get_detai_article.author }}</strong> </h5>
+
+                    </article>
+                    <!--social-detail-->
+
+
+
+
+
+                    <div class="social-detail">
+                        <span>   PARTAGER AVEC VOS AMIS(E)</span>
+
+                        <ul class="list-social-icon">
+                            <li>
+                                <a href="#" class="facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="twitter">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="google">
+                                    <i class="fa fa-google"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="youtube">
+                                    <i class="fa fa-youtube-play"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="pinterest">
+                                    <i class="fa fa-pinterest-p"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="rss">
+                                    <i class="fa fa-rss"></i>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <!--related post-->
+                    <div class="detail-caption">
+                        <span>  DANS LA MÊME CATÉGORIE</span>
+                    </div>
+                    <section class="spotlight-thumbs spotlight-thumbs-related">
+                        <div class="row">
+                            {% for published_article in published_articles %}
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="spotlight-item-thumb">
+                                    <div class="spotlight-item-thumb-img">
+                                        <a href="#">
+                                            <img alt="" src="{{ published_article.thumbail.url }}">
+                                        </a>
+                                        <a href="#" class="cate-tag">{{ published_article.category.name }}</a>
+                                    </div>
+                                    <h3><a href="#">{{ published_article.title }}</a></h3>
+                                    <div class="meta-post">
+                                        <a href="#">
+                                            {{ published_article.author}}
+                                        </a>
+                                        <em></em>
+                                        <span>
+                                           {{ published_article.date_published}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                </div>
+
+                <!--colright-->
+                <div class="col-md-4 col-sm-12">
+                    <!--tab popular-->
+                    <ul role="tablist" class="tab-popular">
+                        <li class="active">
+                            <a href="#tab1" role="tab" data-toggle="tab">
+                                ALERTE
+                            </a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="tab1">
+                            <ul class="list-news-popular">
+                                {% for un in unes %}
+                                <li>
+                                    <a href="#">
+                                        <img alt="" src="{{ un.thumbail.url }}">
+                                    </a>
+                                    <h3><a href="#">{{ un.title }}</a></h3>
+                                    <div class="meta-post">
+                                        <a href="#">
+                                            {{ un.author }}
+
+                                        </a>
+                                        <em></em>
+                                        <span>
+                                           {{ un.date_published }}
+                                        </span>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <!-- special post-->
+                    <div class="connect-us">
+                        <div class="widget-title">
+                            <span>
+                                Poste Spéciale
+                            </span>
+                        </div>
+                        <div class="list-special">
+
+                            <article class="news-two-large">
+                                <a href="#">
+                                    <img alt="" src="images/product/4.jpg">
+                                </a>
+                                <h3><a href="#">Six big ways MacOS Sierra is going to change your Apple experience</a></h3>
+                                <div class="meta-post">
+                                    <a href="#">
+                                        Sue	Benson
+                                    </a>
+                                    <em></em>
+                                    <span>
+                                        23 Sep 2016
+                                    </span>
+                                </div>
+
+                            </article>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
