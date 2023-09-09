@@ -9,31 +9,22 @@
                 <div class="col-md-8 col-sm-12">
                     <!--post-detail-->
                     <article class="post-detail">
-                        <h1>{{ get_detai_article.title }}</h1>
+                        <h1>{{ get_detail_article.title }}</h1>
                         <div class="meta-post">
                             <a href="#">
-                                {{ get_detai_article.author }}
+                                {{ get_detail_article.author }}
                             </a>
                             <em></em>
                             <span>
-                                {{ get_detai_article.date_published }}                            </span>
+                                {{ get_detail_article.date_published }}                            </span>
                         </div>
                               <div class="post-detail-img">
-                            <img alt="" src="{{ get_detai_article.thumbail.url  }}" />
+                            <img alt="" src="{{ get_detail_article.thumbail.url  }}" />
                         </div>
 
-                        <p> <span class="dropcap "></span> {{ get_detai_article.content|safe }} </p>
+                        <p> <span class="dropcap "></span> {{ get_detail_article.content|safe }} </p>
 
-
-
-
-
-
-
-
-
-
-                        <h5 class="text-right font-heading"><strong>{{ get_detai_article.author }}</strong> </h5>
+                        <h5 class="text-right font-heading"><strong>{{ get_detail_article.author }}</strong> </h5>
 
                     </article>
                     <!--social-detail-->
@@ -82,7 +73,7 @@
 
                     <!--related post-->
                     <div class="detail-caption">
-                        <span>  DANS LA MÊME CATÉGORIE</span>
+                        <span>  PUBLIÉ RÉCEMMENT </span>
                     </div>
                     <section class="spotlight-thumbs spotlight-thumbs-related">
                         <div class="row">
@@ -153,29 +144,29 @@
                     <div class="connect-us">
                         <div class="widget-title">
                             <span>
-                                Poste Spéciale
+                                Mention Spéciale
                             </span>
                         </div>
                         <div class="list-special">
-
+                            {% for special in is_special%}
                             <article class="news-two-large">
                                 <a href="#">
-                                    <img alt="" src="images/product/4.jpg">
+                                    <img alt="" src="{{ special.thumbail.url }}">
                                 </a>
-                                <h3><a href="#">Six big ways MacOS Sierra is going to change your Apple experience</a></h3>
+                                <h3><a href="#">{{ special.title }}</a></h3>
                                 <div class="meta-post">
                                     <a href="#">
-                                        Sue	Benson
+                                        {{ special.author}}
                                     </a>
                                     <em></em>
                                     <span>
-                                        23 Sep 2016
+                                      {{ special.date_published }}
                                     </span>
                                 </div>
 
                             </article>
-
-
+                            {% endfor %}
+                            <br>
                         </div>
                     </div>
                 </div>

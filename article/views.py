@@ -1,181 +1,43 @@
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import DetailView
+from django.views.generic import TemplateView
+
 from .models import Article
 
-
-# Create your views here.
-
-
-def index(request):
-    unes = Article.objects.filter(alerte_info=True)
-    is_special = Article.objects.filter(is_special=True)
-    published_articles = Article.objects.filter(category__name="politique", status='Published')
-
-    contexte = {
-        'published_articles': published_articles,
-        'is_special': is_special,
-        "unes": unes,
-
-    }
-    return render(request, 'index/politiques/politique.html', contexte)
+CATEGORY_MAPPING = {
+    'eco': 'economie',
+    'politique': 'politique',
+    'finances': 'finances',
+    'societe': 'societes',
+    'entreprise': 'entreprise',
+    'international': 'international'
+}
 
 
-def detail(request, slug):
-    unes = Article.objects.filter(alerte_info=True)
-    is_special = Article.objects.filter(is_special=True)
-    published_articles = Article.objects.filter(category__name="politique", status='Published')[:3]
-    get_detai_article = get_object_or_404(Article, slug=slug)
-    contexte = {
-        'published_articles': published_articles,
-        'get_detai_article': get_detai_article,
-        'is_special': is_special,
-        "unes": unes
+class ArticlesByCategoryView(TemplateView):
+    template_name = 'index/politiques/politique.html'
 
-    }
-    return render(request, 'index/politiques/detail.html', contexte)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
+        category_name = self.kwargs.get('category_name')
+        actual_category_name = CATEGORY_MAPPING.get(category_name, category_name)
 
-def eco(request):
-    unes = Article.objects.filter(alerte_info=True)
-    is_special = Article.objects.filter(is_special=True)
-    published_articles = Article.objects.filter(category__name="economie", status='Published')
-    contexte = {
-        'published_articles': published_articles,
-        'is_special': is_special,
-        "unes": unes
+        context['unes'] = Article.objects.filter(alerte_info=True)
+        context['is_special'] = Article.objects.filter(is_special=True)
+        context['published_articles'] = Article.objects.filter(category__name=actual_category_name, status='Published')[:3]
 
-    }
-    return render(request, 'index/economie/politique.html', contexte)
+        return context
 
 
-def ecodetail(request, slug):
-    unes = Article.objects.filter(alerte_info=True)
-    is_special = Article.objects.filter(is_special=True)
-    published_articles = Article.objects.filter(category__name="economie", status='Published')[:3]
-    get_detai_article = Article.objects.get(slug=slug)
-    contexte = {
-        'published_articles': published_articles,
-        'get_detai_article': get_detai_article,
-        'is_special': is_special,
-        "unes": unes
+class DetailArticleView(DetailView):
+    model = Article
+    template_name = 'index/politiques/detail.html'
+    context_object_name = 'get_detail_article'
 
-    }
-    return render(request, 'index/economie/detail.html', contexte)
-
-
-def finaces(request):
-    unes = Article.objects.filter(alerte_info=True)
-    is_special = Article.objects.filter(is_special=True)
-    published_articles = Article.objects.filter(category__name="finances", status='Published')
-    contexte = {
-        'published_articles': published_articles,
-        'is_special': is_special,
-        "unes": unes
-
-    }
-    return render(request, 'index/finances/politique.html', contexte)
-
-
-def finacesdetail(request, slug):
-    unes = Article.objects.filter(alerte_info=True)
-    is_special = Article.objects.filter(is_special=True)
-    published_articles = Article.objects.filter(category__name="finances", status='Published')[:3]
-    get_detai_article = Article.objects.get(slug=slug)
-    contexte = {
-        'published_articles': published_articles,
-        'get_detai_article': get_detai_article,
-        'is_special': is_special,
-        "unes": unes
-
-    }
-    return render(request, 'index/finances/detail.html', contexte)
-
-
-# societé
-
-def societe(request):
-    unes = Article.objects.filter(alerte_info=True)
-    is_special = Article.objects.filter(is_special=True)
-    published_articles = Article.objects.filter(category__name="societes", status='Published')
-    contexte = {
-        'published_articles': published_articles,
-        'is_special': is_special,
-        "unes": unes
-
-    }
-    return render(request, 'index/societe/politique.html', contexte)
-
-
-def societesdetail(request, slug):
-    unes = Article.objects.filter(alerte_info=True)
-    published_articles = Article.objects.filter(category__name="societes", status='Published')[:3]
-    get_detai_article = Article.objects.get(slug=slug)
-    is_special = Article.objects.filter(is_special=True)
-
-    contexte = {
-        'published_articles': published_articles,
-        'get_detai_article': get_detai_article,
-        'is_special': is_special,
-        "unes": unes
-
-    }
-    return render(request, 'index/societe/detail.html', contexte)
-
-
-def entreprise(request):
-    unes = Article.objects.filter(alerte_info=True)
-    is_special = Article.objects.filter(is_special=True)
-    published_articles = Article.objects.filter(category__name="entreprise", status='Published')
-    contexte = {
-        'published_articles': published_articles,
-        'is_special': is_special,
-        "unes": unes
-
-    }
-    return render(request, 'index/entreprise/politique.html', contexte)
-
-
-def entreprisedetail(request, slug):
-    unes = Article.objects.filter(alerte_info=True)
-    published_articles = Article.objects.filter(category__name="entreprise", status='Published')[:3]
-    get_detai_article = Article.objects.get(slug=slug)
-    is_special = Article.objects.filter(is_special=True)
-
-    contexte = {
-        'published_articles': published_articles,
-        'get_detai_article': get_detai_article,
-        'is_special': is_special,
-        "unes": unes
-
-    }
-    return render(request, 'index/entreprise/detail.html', contexte)
-
-
-def international(request):
-    is_special = Article.objects.filter(is_special=True)
-    unes = Article.objects.filter(alerte_info=True)
-
-    published_articles = Article.objects.filter(category__name="international", status='Published')
-    contexte = {
-        'published_articles': published_articles,
-        'is_special': is_special,
-        "unes": unes
-
-    }
-    return render(request, 'index/international/politique.html', contexte)
-
-
-def intenationaldetail(request, slug):
-    unes = Article.objects.filter(alerte_info=True)
-    published_articles = Article.objects.filter(category__name="international", status='Published')[:3]
-    get_detai_article = Article.objects.get(slug=slug)
-    is_special = Article.objects.filter(is_special=True)
-
-    contexte = {
-        'published_articles': published_articles,
-        'get_detai_article': get_detai_article,
-        'is_special': is_special,
-        "unes": unes
-
-    }
-    return render(request, 'index/international/detail.html', contexte)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['unes'] = Article.objects.filter(alerte_info=True)
+        context['is_special'] = Article.objects.filter(is_special=True)
+        context['published_articles'] = Article.objects.filter(status='Published')[:3]
+        return context
